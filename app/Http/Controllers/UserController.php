@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        try {
+        // try {
           
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
@@ -68,10 +68,10 @@ class UserController extends Controller
             );} catch (\Throwable $th) {
             //throw $th;
 
-            return response()->json(
-               $th,
-                HttpResponse::HTTP_EXPECTATION_FAILED
-            );
+            // return response()->json(
+            //    $th,
+            //     HttpResponse::HTTP_EXPECTATION_FAILED
+            // );
 
         }
 

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
-Route::post('/login', 'UserController@login');
 Route::group([
-    'middleware' => 'api'
+    'middleware' => 'api',
 ], function ($router) {
     Route::prefix('users')->group(function () {
+        Route::post('/login', 'UserController@login');
         Route::get('/view/{id}', 'UserController@view');
         Route::get('/me', 'UserController@me');
-        
+
         Route::get('/logout', 'UserController@logout');
         Route::post('/create', 'UserController@store');
         Route::delete('/delete/{id}', 'UserController@delete');

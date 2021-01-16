@@ -120,7 +120,7 @@ class UserController extends Controller
     }
 
     public function logout() {
-        auth('api')->logout();
+        Auth::guard('api')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }

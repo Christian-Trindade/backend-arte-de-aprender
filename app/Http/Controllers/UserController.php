@@ -61,10 +61,8 @@ class UserController extends Controller
             $user = User::create($data);
             !$token = auth()->attempt($validator->validated());
                
-            return response()->json(
-                $this->createNewToken($token),
-                HttpResponse::HTTP_OK
-            );
+                $this->createNewToken($token);
+               
         // } catch (\Throwable $th) {
             //throw $th;
 

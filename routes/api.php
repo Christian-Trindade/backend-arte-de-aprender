@@ -12,8 +12,17 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::post('/login', 'UserController@login');
+
+Route::group(['middleware' => 'jwt'], function () {
+    Route::prefix('users')->group(function () {
+        Route::post('/create', 'UserController@store');
+        Route::delete('/delete/{id}', 'UserController@delete');
+        Route::put('/update/{id}', 'UserController@update');
+    });
 });

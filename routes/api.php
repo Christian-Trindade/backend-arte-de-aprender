@@ -32,6 +32,7 @@ Route::group([
         Route::prefix('subject')->group(function () {
             Route::get('/list', 'SubjectController@listSubject');
             Route::get('/view/{id}', 'SubjectController@view');
+            Route::post('/create', 'SubjectController@store');
             Route::delete('/delete/{id}', 'SubjectController@delete');
             Route::put('/update/{id}', 'SubjectController@update');
         });

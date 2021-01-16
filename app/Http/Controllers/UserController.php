@@ -8,15 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Validator;
-use JWTFactory;
-use JWTAuth;
 
 class UserController extends Controller
 {
     //
 
-    public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
@@ -25,7 +24,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        if (! $token = auth()->attempt($validator->validated())) {
+        if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -80,7 +79,30 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user_id = $request->route('id');
-        $user = User::find($user_id)->update($request->all());
+        $user = User::find($user_id);
+
+        try {
+            $validated = $request->validate([
+                'email' => 'required|unique:users|max:255',
+                'password' => 'required',
+            ]);
+
+            $data['password'] = Hash::make($data['password']);
+
+            $user->update($data);
+            return response()->json(
+                $user,
+                HttpResponse::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return response()->json(
+                "User data is required",
+                HttpResponse::HTTP_EXPECTATION_FAILED
+            );
+
+        }
 
         return response()->json(
             $user,

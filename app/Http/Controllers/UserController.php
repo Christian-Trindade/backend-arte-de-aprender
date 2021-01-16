@@ -47,8 +47,8 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
+        if ($validated->fails()) {
+            return response()->json($validated->errors());
         }
 
         $data['password'] = Hash::make($data['password']);

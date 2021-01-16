@@ -120,9 +120,9 @@ class UserController extends Controller
     }
 
     public function me()
-    { 
+    {
         return response()->json(
-            User::find(\Tymon\JWTAuth\Facades\JWTAuth::user()->id),
+            auth()->user(),
             HttpResponse::HTTP_OK
         );
     }

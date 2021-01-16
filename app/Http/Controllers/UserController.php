@@ -59,7 +59,7 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            !$token = auth()->attempt($validator->validated());
+            $token = auth()->attempt($validator->validated());
                
                return $this->createNewToken($token);
                

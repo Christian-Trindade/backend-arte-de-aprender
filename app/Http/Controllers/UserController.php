@@ -65,7 +65,8 @@ class UserController extends Controller
             return response()->json(
                 $this->createNewToken($token),
                 HttpResponse::HTTP_OK
-            );} catch (\Throwable $th) {
+            );
+        // } catch (\Throwable $th) {
             //throw $th;
 
             // return response()->json(
@@ -73,7 +74,7 @@ class UserController extends Controller
             //     HttpResponse::HTTP_EXPECTATION_FAILED
             // );
 
-        }
+        // }
 
     }
 

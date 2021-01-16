@@ -113,7 +113,7 @@ class UserController extends Controller
     public function view($id)
     {
         return response()->json(
-            User::find($user_id),
+            User::find($id),
             HttpResponse::HTTP_OK
         );
 

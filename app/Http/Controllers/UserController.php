@@ -49,8 +49,8 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        // try {
-          
+        try {
+
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'password' => 'required|string|min:6',
@@ -59,19 +59,22 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            $token = auth()->attempt($validator->validated());
-               dd($token);
-               return $this->createNewToken($token);
-               
-        // } catch (\Throwable $th) {
+            $token = JWTAuth::fromUser($user);
+
+            return response()->json(
+                $this->createNewToken($token),
+                HttpResponse::HTTP_OK
+            );
+
+        } catch (\Throwable $th) {
             //throw $th;
 
-            // return response()->json(
-            //    $th,
-            //     HttpResponse::HTTP_EXPECTATION_FAILED
-            // );
+            return response()->json(
+                $th,
+                HttpResponse::HTTP_EXPECTATION_FAILED
+            );
 
-        // }
+        }
 
     }
 

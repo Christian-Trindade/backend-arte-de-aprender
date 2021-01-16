@@ -21,6 +21,12 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password','profile',
     ];
 
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims() {
+        return [];
+    }   
     /**
      * The attributes that should be hidden for arrays.
      *

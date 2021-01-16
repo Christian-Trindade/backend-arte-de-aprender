@@ -19,7 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/login', 'UserController@login');
 Route::post('/create-user', 'UserController@store');
-Route::group(['middleware' => 'jwt'], function () {
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
     Route::prefix('users')->group(function () {
         Route::post('/create', 'UserController@store');
         Route::delete('/delete/{id}', 'UserController@delete');

@@ -122,7 +122,7 @@ class UserController extends Controller
     public function me()
     {
         return response()->json(
-            auth()->user(),
+            Auth::user(),
             HttpResponse::HTTP_OK
         );
     }

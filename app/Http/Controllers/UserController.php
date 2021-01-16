@@ -42,7 +42,14 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        $validator = $this->validation($data);
+        $validated = $request->validate([
+            'email' => 'required|unique:posts|max:255',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
 
         $data['password'] = Hash::make($data['password']);
 

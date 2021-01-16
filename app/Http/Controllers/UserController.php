@@ -13,6 +13,9 @@ class UserController extends Controller
 {
     //
 
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login', 'store']]);
+    }
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -37,6 +40,7 @@ class UserController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'user' => auth()->user()
         ]);
     }
 

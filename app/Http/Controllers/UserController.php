@@ -24,9 +24,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        if (!$token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        if (!$token = auth('api')->attempt($credentials)) {return response()->json(['error' => 'Unauthorized'], 401);}
 
         return response()->json(
             $this->createNewToken($token),

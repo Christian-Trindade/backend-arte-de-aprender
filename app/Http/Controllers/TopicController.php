@@ -23,7 +23,7 @@ class TopicController extends Controller
         $topic = Topic::create($request->all());
         $subject_id = $request->input('subject_id');
         $image_url = "category/" . $subject_id;
-        $path = $this->request->file('image')->store($image_url, 's3');
+        $path = $request->file('image')->store($image_url, 's3');
         $topic->url = basename($path);
         $topic->save();
         return response()->json(
@@ -44,7 +44,7 @@ class TopicController extends Controller
         $path = $this->request->file('image')->store($image_url, 's3');
         $topic->url = basename($path);
         $topic->save();
-        
+
         return response()->json(
             $topic,
             HttpResponse::HTTP_OK

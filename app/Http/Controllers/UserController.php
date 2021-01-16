@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         $user_id = $request->route('id');
         $user = User::find($user_id);
-
+        $data = $request->all();
         try {
             $validated = $request->validate([
                 'email' => 'required|max:255',

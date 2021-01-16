@@ -14,7 +14,7 @@ class UserController extends Controller
     //
 
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['/users/login', 'store']]);
+        $this->middleware('api', ['except' => ['login', 'store']]);
     }
     public function login(Request $request)
     {

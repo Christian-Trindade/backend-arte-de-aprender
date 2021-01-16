@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        try {
+        // try {
 
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
@@ -63,17 +63,17 @@ class UserController extends Controller
             $user = User::create($data);
             $token = JWTAuth::fromUser($user);
 
-            return response()->json(compact($user, $token), 201);
+            return response()->json(compact('user', 'token'), 201);
 
-        } catch (\Throwable $th) {
-            //throw $th;
+        // } catch (\Throwable $th) {
+        //     //throw $th;
 
-            return response()->json(
-                $th,
-                HttpResponse::HTTP_EXPECTATION_FAILED
-            );
+        //     return response()->json(
+        //         $th,
+        //         HttpResponse::HTTP_EXPECTATION_FAILED
+        //     );
 
-        }
+        // }
 
     }
 

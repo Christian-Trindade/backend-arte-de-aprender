@@ -25,7 +25,7 @@ Route::group([
         Route::get('/view/{id}', 'UserController@view');
         Route::get('/me', 'UserController@me');
         
-        Route::post('/logout', 'UserController@logout');
+        Route::get('/logout', 'UserController@logout');
         Route::post('/create', 'UserController@store');
         Route::delete('/delete/{id}', 'UserController@delete');
         Route::put('/update/{id}', 'UserController@update');

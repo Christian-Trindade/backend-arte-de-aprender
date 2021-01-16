@@ -26,8 +26,6 @@ Route::group([
         Route::delete('/delete/{id}', 'UserController@delete');
         Route::put('/update/{id}', 'UserController@update');
     });
-    Route::group(['middleware' => 'jwt'], function () {
         Route::get('/view/{id}', 'UserController@view');
-    });
 });
 

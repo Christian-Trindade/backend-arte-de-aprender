@@ -120,7 +120,7 @@ class UserController extends Controller
     }
 
     public function logout() {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        auth('api')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }

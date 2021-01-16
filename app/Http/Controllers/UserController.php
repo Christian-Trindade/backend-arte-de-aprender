@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Validator;
+use JWTFactory;
+use JWTAuth;
 
 class UserController extends Controller
 {
@@ -15,23 +17,29 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'email' => 'required|string|email|max:255',
+            'password'=> 'required'
         ]);
-
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors());
         }
-
-        if (! $token = auth('api')->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return response()->json(
-            $this->createNewToken($token),
-            HttpResponse::HTTP_OK
+        $email      = $request->input('email');
+        $password   = bcrypt($request->input('password'));
+        $credentials = array(
+            'email'     => $email,
+            'password'  => $password
         );
+
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+        return response()->json(compact('token'));
     }
 
     protected function createNewToken($token)

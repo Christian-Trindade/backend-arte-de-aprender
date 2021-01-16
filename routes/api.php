@@ -22,6 +22,8 @@ Route::group([
     'middleware' => 'api'
 ], function ($router) {
     Route::prefix('users')->group(function () {
+        Route::get('/view/{id}', 'UserController@view');
+        Route::get('/me', 'UserController@me');
         Route::post('/create', 'UserController@store');
         Route::delete('/delete/{id}', 'UserController@delete');
         Route::put('/update/{id}', 'UserController@update');

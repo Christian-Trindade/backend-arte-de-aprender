@@ -61,10 +61,7 @@ class UserController extends Controller
             $user = User::create($data);
             $token = JWTAuth::fromUser($user);
 
-            return response()->json(
-                $this->createNewToken($token),
-                HttpResponse::HTTP_OK
-            );
+            return $this->createNewToken($token);
 
         } catch (\Throwable $th) {
             //throw $th;

@@ -2,34 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Beat;
+use App\Achievement;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
-class BeatController extends Controller
+class AchievementController extends Controller
 {
     //
-    public function listAllBeat()
+    public function listAllAchievement()
     {
         return response()->json(
-            Beat::all(),
+            Achievement::all(),
             HttpResponse::HTTP_OK
         );
 
     }
 
-    public function listByCategory($id)
-    {
-        return response()->json(
-            Beat::where('beat_category_id', (int) $id)->get(),
-            HttpResponse::HTTP_OK
-        );
-    }
 
     public function store(Request $request)
     {
         return response()->json(
-            Beat::create($request->all()),
+            Achievement::create($request->all()),
             HttpResponse::HTTP_OK
         );
     }
@@ -38,7 +31,7 @@ class BeatController extends Controller
     {
         $id = $request->route('id');
         $data = $request->all();
-        $beat = Beat::find($id);
+        $beat = Achievement::find($id);
         $beat->update($data);
         return response()->json(
             $beat,
@@ -49,7 +42,7 @@ class BeatController extends Controller
     public function view($id)
     {
         return response()->json(
-            Beat::find($id),
+            Achievement::find($id),
             HttpResponse::HTTP_OK
         );
     }
@@ -57,7 +50,7 @@ class BeatController extends Controller
     public function delete($id)
     {
         return response()->json(
-            Beat::find($id)->delete(),
+            Achievement::find($id)->delete(),
             HttpResponse::HTTP_NO_CONTENT
         );
     }

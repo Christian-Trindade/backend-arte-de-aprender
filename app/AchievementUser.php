@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Achievement_user extends Model
+class AchievementUser extends Model
 {
     //
-    protected $table = 'achievements';
+    protected $table = 'achievement_users';
     public $timestamps = true;
 
     protected $fillable = [

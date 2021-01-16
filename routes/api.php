@@ -28,5 +28,14 @@ Route::group([
             Route::delete('/delete/{id}', 'UserController@delete');
             Route::put('/update/{id}', 'UserController@update');
         });
+
+        Route::prefix('subject')->group(function () {
+            Route::get('/list', 'SubjectController@listSubject');
+            Route::get('/view/{id}', 'SubjectController@view');
+            Route::delete('/delete/{id}', 'SubjectController@delete');
+            Route::put('/update/{id}', 'SubjectController@update');
+        });
+
+        
     });
 });

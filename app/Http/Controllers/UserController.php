@@ -59,9 +59,8 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            if (!$token = auth()->attempt($validator->validated())) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
+            !$token = auth()->attempt($validator->validated());
+               
             return response()->json(
                 $this->createNewToken($token),
                 HttpResponse::HTTP_OK

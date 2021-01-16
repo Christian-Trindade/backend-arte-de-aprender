@@ -69,7 +69,7 @@ class UserController extends Controller
             //throw $th;
 
             return response()->json(
-                "User data is required",
+               $th,
                 HttpResponse::HTTP_EXPECTATION_FAILED
             );
 

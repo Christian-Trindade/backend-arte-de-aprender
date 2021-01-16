@@ -109,4 +109,21 @@ class UserController extends Controller
             HttpResponse::HTTP_OK
         );
     }
+
+    public function view($id)
+    {
+        return response()->json(
+            User::find($user_id),
+            HttpResponse::HTTP_OK
+        );
+
+    }
+
+    public function me()
+    {
+        return response()->json(
+            \Tymon\JWTAuth\Facades\JWTAuth::user(),
+            HttpResponse::HTTP_OK
+        );
+    }
 }

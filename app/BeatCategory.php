@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class BeatCategory extends Model
 {
     //
-    protected $table = 'likes';
+    protected $table = 'beat_categories';
     public $timestamps = true;
 
     protected $fillable = [
-        'user_id', 'audio_id',
+        'name', 'active'
     ];
 }

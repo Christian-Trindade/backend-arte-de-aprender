@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     //
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('api', ['except' => ['login', 'store']]);
     }
     public function login(Request $request)
@@ -40,7 +41,7 @@ class UserController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth()->user(),
         ]);
     }
 
@@ -57,8 +58,11 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
+            if (!$token = auth()->attempt($validator->validated())) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
             return response()->json(
-                $user,
+                $this->createNewToken($token),
                 HttpResponse::HTTP_OK
             );} catch (\Throwable $th) {
             //throw $th;
@@ -123,7 +127,8 @@ class UserController extends Controller
 
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::guard('api')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);

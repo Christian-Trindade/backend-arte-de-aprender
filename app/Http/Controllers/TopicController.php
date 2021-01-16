@@ -20,8 +20,14 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {
+        $topic = Topic::create($request->all());
+        $subject_id = $request->input('subject_id');
+        $image_url = "category/" . $subject_id;
+        $path = $this->request->file('image')->store($image_url, 's3');
+        $topic->url = basename($path);
+        $topic->save();
         return response()->json(
-            Topic::create($request->all()),
+            $topic,
             HttpResponse::HTTP_OK
         );
     }
@@ -32,6 +38,13 @@ class TopicController extends Controller
         $data = $request->all();
         $topic = Topic::find($id);
         $topic->update($data);
+
+        $subject_id = $request->input('subject_id');
+        $image_url = "category/" . $subject_id;
+        $path = $this->request->file('image')->store($image_url, 's3');
+        $topic->url = basename($path);
+        $topic->save();
+        
         return response()->json(
             $topic,
             HttpResponse::HTTP_OK

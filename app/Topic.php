@@ -11,6 +11,6 @@ class Topic extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'subject_id','name','image','content'
+        'subject_id','name','content'
     ];
 }

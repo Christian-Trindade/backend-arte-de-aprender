@@ -16,18 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
-    Route::prefix('users')->group(function () {
-        Route::post('/login', 'UserController@login');
-        Route::get('/view/{id}', 'UserController@view');
-        Route::get('/me', 'UserController@me');
+    Route::post('/login', 'UserController@login');
+    Route::post('/create', 'UserController@store');
 
-        Route::get('/logout', 'UserController@logout');
-        Route::post('/create', 'UserController@store');
-        Route::delete('/delete/{id}', 'UserController@delete');
-        Route::put('/update/{id}', 'UserController@update');
-    });
-    Route::group(['middleware' => ['jwt.verify']], function() {
-        Route::get('/view/{id}', 'UserController@view');
+    Route::group(['middleware' => ['jwt.verify']], function () {
+
+        Route::prefix('users')->group(function () {
+            Route::get('/view/{id}', 'UserController@view');
+            Route::get('/me', 'UserController@me');
+            Route::get('/logout', 'UserController@logout');
+            Route::delete('/delete/{id}', 'UserController@delete');
+            Route::put('/update/{id}', 'UserController@update');
+        });
     });
 });
-

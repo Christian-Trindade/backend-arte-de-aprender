@@ -42,22 +42,28 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        $validated = $request->validate([
-            'email' => 'required|unique:users|max:255',
-            'password' => 'required',
-        ]);
+        try {
+            $validated = $request->validate([
+                'email' => 'required|unique:users|max:255',
+                'password' => 'required',
+            ]);
 
-        if ($validated->fails()) {
-            return response()->json($validated->errors());
+            $data['password'] = Hash::make($data['password']);
+
+            $user = User::create($data);
+            return response()->json(
+                $user,
+                HttpResponse::HTTP_OK
+            );} catch (\Throwable $th) {
+            //throw $th;
+
+            return response()->json(
+                "User data is required",
+                HttpResponse::HTTP_EXPECTATION_FAILED
+            );
+
         }
 
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::create($data);
-        return response()->json(
-            $user,
-            HttpResponse::HTTP_OK
-        );
     }
 
     public function delete($id)

@@ -50,15 +50,16 @@ class UserController extends Controller
         $data = $request->all();
 
         try {
-            $validated = $request->validate([
-                'email' => 'required|unique:users|max:255',
-                'password' => 'required',
+          
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'password' => 'required|string|min:6',
             ]);
 
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            if (!$token = auth()->attempt($validated->validated())) {
+            if (!$token = auth()->attempt($validator->validated())) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
             return response()->json(

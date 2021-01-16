@@ -43,7 +43,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $validated = $request->validate([
-            'email' => 'required|unique:posts|max:255',
+            'email' => 'required|unique:users|max:255',
             'password' => 'required',
         ]);
 

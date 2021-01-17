@@ -13,7 +13,7 @@ class TopicController extends Controller
     {
         $topics = Topic::where('subject_id', $id)->get();
         $topics->each(function ($topic) {
-            $topic->qty_audio = Audio::where('topic_id', $id)->get()->count();
+            $topic->qty_audio = Audio::where('topic_id', $topic->id)->get()->count();
         });
         return response()->json(
             $topics,

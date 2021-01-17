@@ -35,6 +35,12 @@ class AudioController extends Controller
 
     public function store(Request $request)
     {
+        $request = $client
+            ->post('receiveFile')
+            ->addPostFields(array('current_time'=>$current_time))
+            ->addPostFile('file', $file)
+            ->removeHeader('Expect')
+            ->send();
         $audio = Audio::create($request->all());
         $topic_id = $request->input('topic_id');
         $user_id = $request->input('user_id');

@@ -24,7 +24,7 @@ class AudioController extends Controller
     public function getBestAudios()
     {
         return response()->json(
-            [Carbon::now()],
+            [Carbon::now(),Carbon::now()->subHour(48), Carbon::now()->subHour(24)],
             HttpResponse::HTTP_OK
         );
         $likes_audio = Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')

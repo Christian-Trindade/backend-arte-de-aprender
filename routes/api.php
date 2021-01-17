@@ -40,9 +40,6 @@ Route::group([
         Route::prefix('topic')->group(function () {
             Route::get('/list/{id}', 'TopicController@listTopic');
             Route::get('/view/{id}', 'TopicController@view');
-            Route::post('/create', 'TopicController@store');
-            Route::delete('/delete/{id}', 'TopicController@delete');
-            Route::put('/update/{id}', 'TopicController@update');
         });
 
         

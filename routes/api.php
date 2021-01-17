@@ -68,7 +68,7 @@ Route::group([
         Route::prefix('like')->group(function () {
             Route::get('/audio/{id}', 'LikeController@listBeatCategory');
             Route::post('/create', 'LikeController@store');
-            Route::get('/delete/{id}', 'LikeController@delete');
+            Route::get('/delete', 'LikeController@delete');
         });
 
     });

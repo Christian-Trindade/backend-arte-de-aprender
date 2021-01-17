@@ -32,8 +32,10 @@ class AudioController extends Controller
             ->orderBy("total", "DESC")
             ->get();
         $likes_audio->each(function ($like) {
-            $like->audio = Audio::find($like->audio_id);
-            $like->topic = Topic::find($like->audio->topic_id);
+            $audio=Audio::find($like->audio_id);
+            $like->audio = $audio->url;
+            $topic =Topic::find($like->audio->topic_id);
+            $like->image = $topic->image;
         });
         return response()->json(
             $likes_audio,

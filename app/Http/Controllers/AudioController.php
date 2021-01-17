@@ -34,7 +34,7 @@ class AudioController extends Controller
         $likes_audio->each(function ($like) {
             $audio=Audio::find($like->audio_id);
             $like->audio = $audio->url;
-            $topic =Topic::find($like->audio->topic_id);
+            $topic =Topic::find($audio->topic_id);
             $like->image = $topic->image;
         });
         return response()->json(

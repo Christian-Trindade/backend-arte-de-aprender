@@ -44,6 +44,8 @@ class AudioController extends Controller
             $audio->image =$topic->image;
             $audio->subject_id = $topic->subject_id;
             $audio->audio = $audio->url;
+            $audio->resume = $topic->resume;
+            $audio->title= $topic->name;
         });
        
         return response()->json(

@@ -7,55 +7,58 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3>
+The project is one Laravel 7.x, the project is using only for <a href="http://ccr.berap.com.br/" _blank="_target">API</a> for connect frontend application with MySQL database and AWS S3.<br>
+</h3>
+<h1>Getting started</h1>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<h2>Installation</h2>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p>Please check the official laravel installation guide for server requirements before you start.&nbsp;<a href="https://laravel.com/docs/5.4/installation#installation" rel="nofollow">Official Documentation</a></p>
 
-## Learning Laravel
+<p>Alternative installation is possible without local dependencies relying on&nbsp;<a href="https://github.com/gothinkster/laravel-realworld-example-app/blob/master/readme.md#docker">Docker</a>.</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p>Clone the repository</p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<pre>
+<code>git clone https://github.com/Christian-Trindade/backend-arte-de-aprender.git
+</code></pre>
 
-## Laravel Sponsors
+<p>Switch to the repo folder</p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<pre>
+<code>cd arte-aprender
+</code></pre>
 
-### Premium Partners
+<p>Install all the dependencies using composer</p>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+<pre>
+<code>composer install
+</code></pre>
 
-## Contributing
+<p>Copy the example env file and make the required configuration changes in the .env file</p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<pre>
+<code>cp .env.example .env
+</code></pre>
 
-## Code of Conduct
+<p>Generate a new application key</p>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<pre>
+<code>php artisan key:generate
+</code></pre>
 
-## Security Vulnerabilities
+<p>Generate a new JWT authentication secret key</p>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<pre>
+<code>php artisan jwt:generate
+</code></pre>
 
-## License
+<p>Run the database migrations (<strong>Set the database connection in .env before migrating</strong>)</p>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<pre>
+<code>php artisan migrate
+</code></pre>
+
+<p>&nbsp;</p>

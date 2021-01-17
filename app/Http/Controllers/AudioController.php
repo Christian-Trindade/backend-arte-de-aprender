@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Audio;
 use App\Like;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class AudioController extends Controller
@@ -23,13 +23,17 @@ class AudioController extends Controller
 
     public function getBestAudios()
     {
-        return response()->json(
-        Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')
+        $likes_audio = Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')
             ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
             ->groupBy("audio_id")
             ->limit(10)
             ->orderBy("total", "DESC")
-            ->get(),
+            ->get();
+        $likes_audio->each(function ($like) {
+            $like->audio = Audio::find($like->audio_id);
+        });
+        return response()->json(
+            $likes_audio,
             HttpResponse::HTTP_OK
         );
     }

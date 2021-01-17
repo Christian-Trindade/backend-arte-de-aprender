@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Audio;
 use App\Like;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 

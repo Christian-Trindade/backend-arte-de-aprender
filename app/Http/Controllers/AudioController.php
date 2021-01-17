@@ -72,7 +72,8 @@ class AudioController extends Controller
 
         $audio_url = "topic/" . $topic_id . "/user/" . $user_id;
         $path = $request->file('audio')->store($audio_url, 's3');
-        $audio->title = $topic->name ." ".$user->name." ". $count_audio+1;
+        $count_audio=$count_audio+1;
+        $audio->title = $topic->name ." ".$user->name." ".(string) $count_audio;
 
         $audio->url = basename($path);
         $audio->save();

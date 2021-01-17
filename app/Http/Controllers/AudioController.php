@@ -21,12 +21,15 @@ class AudioController extends Controller
 
     public function getBestAudios()
     {
+        return response()->json(
         Like::select(BD::raw('COUNT(audio_id) as total'))
             ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
             ->groupBy("audio_id")
             ->Limit(10)
             ->OrderBy("total", "DESC")
-            ->get();
+            ->get(),
+            HttpResponse::HTTP_OK
+        );
     }
 
     public function listByUser($id)

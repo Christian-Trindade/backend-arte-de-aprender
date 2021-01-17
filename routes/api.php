@@ -58,6 +58,7 @@ Route::group([
             Route::get('/list-topic/{id}', 'AudioController@listByTopic');
             Route::get('/list-user/{id}', 'AudioController@listByUser');
             Route::get('/list-beat/{id}', 'AudioController@listByBeat');
+            Route::get('list-best','AudioController@getBestAudios');
             Route::get('/view/{id}', 'AudioController@view');
             Route::delete('/delete/{id}', 'AudioController@delete');
             Route::post('/create', 'AudioController@store');

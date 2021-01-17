@@ -48,7 +48,7 @@ class LikeController extends Controller
 
         return response()->json(
             $this->getCountLike($audio_id),
-            HttpResponse::HTTP_NO_CONTENT
+            HttpResponse::HTTP_OK
         );
     }
 }

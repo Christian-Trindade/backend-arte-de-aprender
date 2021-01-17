@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Audio;
 use App\Like;
 use App\Topic;
+use App\Subject;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -56,8 +57,20 @@ class AudioController extends Controller
 
     public function listByUser($id)
     {
+        $audios = Audio::where('user_id', (int) $id)->get();
+
+        $audios->each(function ($audio) {
+            $topic =Topic::find($audio->topic_id);
+            $audio->image =$topic->image;
+            $audio->subject_id = $topic->subject_id;
+            $subject =Subject::find($topic->subject_id);
+            $audio->subject_name  = $subject->name;
+            $audio->audio = $audio->url;
+            $audio->resume = $topic->resume;
+            $audio->title= $topic->name;
+        });
         return response()->json(
-            Audio::where('user_id', (int) $id)->get(),
+            $audios,
             HttpResponse::HTTP_OK
         );
     }

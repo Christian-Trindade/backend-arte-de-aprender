@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\BeatCategory;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class BeatCategoryController extends Controller
@@ -26,26 +25,6 @@ class BeatCategoryController extends Controller
         );
     }
 
-    public function store(Request $request)
-    {
-        return response()->json(
-            BeatCategory::create($request->all()),
-            HttpResponse::HTTP_OK
-        );
-    }
-
-    public function update(Request $request)
-    {
-        $id = $request->route('id');
-        $data = $request->all();
-        $beatCategory = BeatCategory::find($id);
-        $beatCategory->update($data);
-        return response()->json(
-            $beatCategory,
-            HttpResponse::HTTP_OK
-        );
-    }
-
     public function view($id)
     {
         return response()->json(
@@ -54,11 +33,4 @@ class BeatCategoryController extends Controller
         );
     }
 
-    public function delete($id)
-    {
-        return response()->json(
-            BeatCategory::find($id)->delete(),
-            HttpResponse::HTTP_NO_CONTENT
-        );
-    }
 }

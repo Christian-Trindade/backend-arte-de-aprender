@@ -42,6 +42,17 @@ Route::group([
             Route::get('/view/{id}', 'TopicController@view');
         });
 
-        
+        Route::prefix('beat')->group(function () {
+            Route::get('/list-all', 'BeatController@listAllBeat');
+            Route::get('/list-category/{id}', 'BeatController@listByCategory');
+            Route::get('/view/{id}', 'BeatController@view');
+        });
+
+        Route::prefix('beat-category')->group(function () {
+            Route::get('/list-all', 'BeatCategoryController@listBeatCategory');
+            Route::get('/list-status/{id}', 'BeatCategoryController@getByStatus');
+            Route::get('/view/{id}', 'BeatCategoryController@view');
+        });
+
     });
 });

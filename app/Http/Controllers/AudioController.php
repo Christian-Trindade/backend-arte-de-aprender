@@ -42,7 +42,7 @@ class AudioController extends Controller
         $audios->each(function ($audio) {
             $topic =Topic::find($audio->topic_id);
             $audio->image =$topic->image;
-            $like->subject_id = $topic->subject_id;
+            $audio->subject_id = $topic->subject_id;
             $audio->audio = $audio->url;
         });
        

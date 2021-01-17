@@ -6,23 +6,21 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use JWTAuth;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Validator;
-use JWTAuth;
-
 
 class UserController extends Controller
 {
     //
 
-   
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
-        $myTTL =6000;
+        $myTTL = 6000;
         JWTAuth::factory()->setTTL($myTTL);
 
         if ($validator->fails()) {
@@ -62,7 +60,12 @@ class UserController extends Controller
             $user = User::create($data);
             $token = JWTAuth::fromUser($user);
 
-            return response()->json(compact('user', 'token'), 200);
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth('api')->factory()->getTTL() * 6000,
+                'user' => auth()->user(),
+            ], 200);
 
         } catch (\Throwable $th) {
             //throw $th;

@@ -24,7 +24,7 @@ class AudioController extends Controller
     public function getBestAudios()
     {
         $likes_audio = Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')
-            ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
+            // ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
             ->groupBy("audio_id")
             ->limit(10)
             ->orderBy("total", "DESC")

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Audio;
 use App\Topic;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class TopicController extends Controller
 {
-    //
     public function listTopic($id)
     {
         $topics = Topic::where('subject_id', $id)->get();
@@ -19,7 +19,15 @@ class TopicController extends Controller
             $topics,
             HttpResponse::HTTP_OK
         );
+    }
 
+    public function searchByName(Request $request)
+    {
+       $name = $request->input('name');
+       return response()->json(
+        Topic::where('name', 'like','%'.$name.'%')->get(),
+        HttpResponse::HTTP_OK
+    );
     }
 
     public function view($id)

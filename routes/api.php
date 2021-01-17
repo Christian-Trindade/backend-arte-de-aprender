@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/teste', 'LikeController@teste');
 
-
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
@@ -42,6 +41,7 @@ Route::group([
         Route::prefix('topic')->group(function () {
             Route::get('/list/{id}', 'TopicController@listTopic');
             Route::get('/view/{id}', 'TopicController@view');
+            Route::post('/search', 'TopicController@searchByName');
         });
 
         Route::prefix('beat')->group(function () {
@@ -60,7 +60,7 @@ Route::group([
             Route::get('/list-topic/{id}', 'AudioController@listByTopic');
             Route::get('/list-user/{id}', 'AudioController@listByUser');
             Route::get('/list-beat/{id}', 'AudioController@listByBeat');
-            Route::get('list-best','AudioController@getBestAudios');
+            Route::get('list-best', 'AudioController@getBestAudios');
             Route::get('/view/{id}', 'AudioController@view');
             Route::delete('/delete/{id}', 'AudioController@delete');
             Route::post('/create', 'AudioController@store');

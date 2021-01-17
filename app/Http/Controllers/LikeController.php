@@ -29,17 +29,6 @@ class LikeController extends Controller
         );
     }
 
-    public function teste(){
-
-       
-      $teste =  Like::select(DB::raw('COUNT(audio_id) as total'))
-            ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
-            ->groupBy("audio_id")
-            ->Limit(10)
-            ->OrderBy("total", "DESC")
-            ->get();
-        dd($teste);
-     }
 
 
     private function getCurrentLike($audio_id, $user_id)

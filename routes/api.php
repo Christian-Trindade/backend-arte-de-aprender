@@ -54,5 +54,16 @@ Route::group([
             Route::get('/view/{id}', 'BeatCategoryController@view');
         });
 
+        Route::prefix('beat-category')->group(function () {
+            Route::get('/list-topic/{id}', 'AudioController@listByTopic');
+            Route::get('/list-user/{id}', 'AudioController@listByUser');
+            Route::get('/list-beat/{id}', 'AudioController@listByBeat');
+            Route::get('/view/{id}', 'AudioController@view');
+            Route::delete('/delete/{id}', 'AudioController@delete');
+            Route::post('/create', 'AudioController@store');
+            Route::put('/update/{id}', 'AudioController@update');
+            
+        });
+
     });
 });

@@ -67,7 +67,7 @@ class AudioController extends Controller
         $topic_id = $request->input('topic_id');
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-        $topic = Topic::finf($topic_id);
+        $topic = Topic::find($topic_id);
         $count_audio =Audio::where('user_id', $user_id)->where('topic_id', $topic_id)->get()->count();
 
         $audio_url = "topic/" . $topic_id . "/user/" . $user_id;

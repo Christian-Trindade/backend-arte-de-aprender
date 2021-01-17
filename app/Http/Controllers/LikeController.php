@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -26,6 +28,19 @@ class LikeController extends Controller
             HttpResponse::HTTP_OK
         );
     }
+
+    public function teste(){
+
+       
+      $teste =  Like::select(DB::raw('COUNT(audio_id) as total'))
+            ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()->subHour(24)])
+            ->groupBy("audio_id")
+            ->Limit(10)
+            ->OrderBy("total", "DESC")
+            ->get();
+        dd($teste);
+     }
+
 
     private function getCurrentLike($audio_id, $user_id)
     {

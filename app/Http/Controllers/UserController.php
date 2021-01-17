@@ -15,16 +15,15 @@ class UserController extends Controller
 {
     //
 
-    public function __construct()
-    {
-        $this->middleware('api', ['except' => ['login', 'store']]);
-    }
+   
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
+        $myTTL =6000;
+        JWTAuth::factory()->setTTL($myTTL);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);

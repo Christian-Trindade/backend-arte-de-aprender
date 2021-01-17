@@ -12,7 +12,7 @@ class LikeController extends Controller
     public function getLikesByAudio($id)
     {
         return response()->json(
-            Like::where('audio_id', (int) $id)->get()->cout(),
+            Like::where('audio_id', (int) $id)->get()->count(),
             HttpResponse::HTTP_OK
         );
     }

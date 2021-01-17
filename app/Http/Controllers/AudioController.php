@@ -16,8 +16,13 @@ class AudioController extends Controller
     //
     public function listByTopic($id)
     {
+        $audios = Audio::where('topic_id', $id)->get();
+        $audios->each(function($audio){
+            $user = User::find($audio->user_id);
+            $audio->user_name =$user->name;
+        }); 
         return response()->json(
-            Audio::where('topic_id', $id)->get(),
+            $audios,
             HttpResponse::HTTP_OK
         );
 

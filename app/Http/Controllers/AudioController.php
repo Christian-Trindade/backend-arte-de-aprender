@@ -55,7 +55,7 @@ class AudioController extends Controller
     {
         $id = $request->route('id');
         $audio = Audio::find($id);
-        $audio->name = $request->input('name');
+        $audio->title = $request->input('title');
         $audio->save();
         return response()->json(
             $audio,

@@ -15,7 +15,7 @@ The project is one Laravel 7.x, the project is using only for <a href="http://cc
 
 <h2>Installation</h2>
 
-<p>Please check the official laravel installation guide for server requirements before you start.&nbsp;<a href="https://laravel.com/docs/5.4/installation#installation" rel="nofollow">Official Documentation</a></p>
+<p>Please check the official laravel installation guide for server requirements before you start.&nbsp;<a href="https://laravel.com/docs/7.x/installation" rel="nofollow">Official Documentation</a></p>
 
 <p>Alternative installation is possible without local dependencies relying on&nbsp;<a href="https://github.com/gothinkster/laravel-realworld-example-app/blob/master/readme.md#docker">Docker</a>.</p>
 

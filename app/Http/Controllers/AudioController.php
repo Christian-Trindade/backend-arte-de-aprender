@@ -65,9 +65,13 @@ class AudioController extends Controller
         $audio = Audio::create($request->all());
         $topic_id = $request->input('topic_id');
         $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+        $topic = Topic::finf($topic_id);
+        $count_audio =Audio::where('user_id', $user_id)->where('topic_id', $topic_id)->get()->count();
 
         $audio_url = "topic/" . $topic_id . "/user/" . $user_id;
         $path = $request->file('audio')->store($audio_url, 's3');
+        $audio->title = $topic->name ." ".$user->name." ". $count_audio+1;
 
         $audio->url = basename($path);
         $audio->save();

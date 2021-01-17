@@ -11,6 +11,6 @@ class Audio extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'topic_id', 'user_id', 'beat_id','url','title'
+        'topic_id', 'user_id', 'beat_id','url'
     ];
 }

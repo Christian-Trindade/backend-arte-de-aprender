@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Audio;
+use App\Like;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -16,6 +17,15 @@ class AudioController extends Controller
             HttpResponse::HTTP_OK
         );
 
+    }
+
+    public function getBestAudios()
+    {
+        Like::select(BD::raw('COUNT(audio_id) as total'))
+            ->groupBy("audio_id")
+            ->Limit(10)
+            ->OrderBy("total", "DESC")
+            ->get();
     }
 
     public function listByUser($id)
@@ -35,7 +45,7 @@ class AudioController extends Controller
 
     public function store(Request $request)
     {
-      
+
         $audio = Audio::create($request->all());
         $topic_id = $request->input('topic_id');
         $user_id = $request->input('user_id');
@@ -70,8 +80,6 @@ class AudioController extends Controller
             HttpResponse::HTTP_OK
         );
     }
-
-   
 
     public function delete($id)
     {

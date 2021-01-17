@@ -62,7 +62,13 @@ Route::group([
             Route::delete('/delete/{id}', 'AudioController@delete');
             Route::post('/create', 'AudioController@store');
             Route::put('/update/{id}', 'AudioController@update');
-            
+
+        });
+
+        Route::prefix('like')->group(function () {
+            Route::get('/audio/{id}', 'LikeController@listBeatCategory');
+            Route::post('/create', 'LikeController@store');
+            Route::delete('/delete/{id}', 'LikeController@delete');
         });
 
     });

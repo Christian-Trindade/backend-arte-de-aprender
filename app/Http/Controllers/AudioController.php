@@ -31,21 +31,23 @@ class AudioController extends Controller
     public function getBestAudios()
     {
  
-        $likes_audio = Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')
-            // ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()])
-            ->groupBy("audio_id")
-            ->limit(10)
-            ->orderBy("total", "DESC")
-            ->get();
-        $likes_audio->each(function ($like) {
-            $audio=Audio::find($like->audio_id);
-            $like->audio = $audio->url;
+        // $likes_audio = Like::select(DB::raw('COUNT(audio_id) as total'), 'audio_id')
+        //     // ->whereBetween('created_at', [Carbon::now()->subHour(48), Carbon::now()])
+        //     ->groupBy("audio_id")
+        //     ->limit(10)
+        //     ->orderBy("total", "DESC")
+        //     ->get();
+        
+        $audios = Audio::all();
+        $audios->each(function ($audio) {
             $topic =Topic::find($audio->topic_id);
-            $like->image = $topic->image;
+            $audio->image =$topic->image;
             $like->subject_id = $topic->subject_id;
+            $audio->audio = $audio->url;
         });
+       
         return response()->json(
-            $likes_audio,
+            $audios,
             HttpResponse::HTTP_OK
         );
     }

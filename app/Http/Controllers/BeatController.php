@@ -10,8 +10,13 @@ class BeatController extends Controller
     //
     public function listAllBeat()
     {
+        $beats = Beat::all();
+        $beats->each(function ($beat) {
+            $category = BeatCategory::find($beat->beat_category_id);
+            $beat->category_name = $category->name;
+        });
         return response()->json(
-            Beat::all(),
+            $beats,
             HttpResponse::HTTP_OK
         );
 

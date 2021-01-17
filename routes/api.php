@@ -54,7 +54,7 @@ Route::group([
             Route::get('/view/{id}', 'BeatCategoryController@view');
         });
 
-        Route::prefix('beat-category')->group(function () {
+        Route::prefix('audio')->group(function () {
             Route::get('/list-topic/{id}', 'AudioController@listByTopic');
             Route::get('/list-user/{id}', 'AudioController@listByUser');
             Route::get('/list-beat/{id}', 'AudioController@listByBeat');
